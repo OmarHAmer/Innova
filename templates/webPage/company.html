@@ -1,0 +1,106 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/our-goal.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Our Company<span class="style-color">.</span></h1>
+                    <div class="breadcrumb-trail link-style-2">
+                        <a class="home" href="{% url 'innova:Home' %}">Home Page</a><span>Company Overview</span>
+                    </div>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<section class="tf-space flat-and and-style">
+    <div class="container">
+        <div class="row">                      
+            {% for company in company %}
+                <div class="col-12 container-center">
+                    <img src="{{company.Image.url}}" alt="images" style="height: 140px;">                                                    
+                </div> 
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section3 %}
+{% for info in companyInformation %}
+{% if forloop.counter|divisibleby:2 %}
+<section class="tf-space flat-trusted" id="{{info.id}}">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-8  wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="trusted-heading">
+                    <h2 class="tf-title"><span class="text-color-3 style-title">{{info.name}}</span></h2>
+                </div>
+                    <!-- <h3 class="text-color-3">{{info.Position}}</h3> -->
+                    <p><b>{{info.description|linebreaksbr}}</b></p>
+            </div>
+           
+            <div class="col-lg-4 col-md-4  wow fadeInDown" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="media-box">
+                    <div class="mediafull">
+                        <img class="img100" src="{{info.Image.url}}" alt="images">                                                                   
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="tf-space flat-trusted" id="{{info.id}}">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-4 col-md-4  wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="media-box">
+                    <div class="mediafull">
+                        <img class="img100" src="{{info.Image.url}}" alt="images">                                                                   
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-8  wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="trusted-heading">
+                    <h2 class="tf-title"><span class="text-color-3 style-title">{{info.name}}</span></h2>
+                </div>
+                    <!-- <h3 class="text-color-3">{{info.Position}}</h3> -->
+                    <p><b>{{info.description|linebreaksbr}}</b></p>
+            </div>
+           
+        </div>
+    </div>
+    
+</section>
+{% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block js2 %}
+{% if hash %}
+<script>
+    window.onload = function () { 
+            setTimeout(function () { 
+                document.getElementById('{{hash}}').scrollIntoView({behavior:'smooth'})
+            }, 2000); // Delay of 5 seconds 
+        };     
+</script>   
+{% endif %} 
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/Our Leaders-min.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Our Company<span class="style-color">.</span></h1>
+                    <div class="breadcrumb-trail link-style-2">
+                        <a class="home" href="{% url 'innova:Home' %}">Home Page</a><span>Our Leaders</span>
+                    </div>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+{% for board in boardMember %}
+{% if forloop.counter|divisibleby:2 %}
+<section class="tf-space flat-trusted" id="{{board.id}}">
+    
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-8  wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="trusted-heading">
+                    <h2 class="tf-title"><span class="text-color-3 style-title">{{board.name}}</span></h2>
+                </div>
+                    <h3 class="text-color-3">{{board.Position}}</h3>
+                    <p>{{board.description|linebreaksbr}}</p>
+            </div>
+           
+            <div class="col-lg-4 col-md-4  wow fadeInDown" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="media-box">
+                    <div class="mediafull">
+                        <img class="img100" src="{{board.Image.url}}" alt="images">                                                                   
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</section>
+{% else %}
+<section class="tf-space flat-trusted" id="{{board.id}}">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-4 col-md-4  wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="media-box">
+                    <div class="mediafull">
+                        <img class="img100" src="{{board.Image.url}}" alt="images">                                                                   
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-8  wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="trusted-heading">
+                    <h2 class="tf-title"><span class="text-color-3 style-title">{{board.name}}</span></h2>
+                </div>
+                    <h3 class="text-color-3">{{board.Position}}</h3>
+                    <p>{{board.description|linebreaksbr}}</p> 
+            </div>
+           
+        </div>
+    </div>
+    
+</section>
+{% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block js2 %}
+{% if hash %}
+<script>
+    window.onload = function () { 
+            setTimeout(function () { 
+                document.getElementById('{{hash}}').scrollIntoView({behavior:'smooth'})
+            }, 2000); // Delay of 5 seconds 
+        };     
+</script>   
+{% endif %} 
+{% endblock %}

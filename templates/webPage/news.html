@@ -1,0 +1,46 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/news.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>News<span class="style-color">.</span></h1>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<section class="tf-space flat-journey">
+    <div class="container">
+        <div class="row">
+            {% for news in news %}
+            <div class="col-lg-6 col-md-5  wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="media">
+                    <img src="{{news.image.url}}" alt="images">                                                       
+                </div>                             
+            </div>
+            <div class="col-lg-6  wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="journey-heading">
+                    <div class="tf-sub-title">News</div>
+                    <h2 class="tf-title"><span class="text-color-3 style-title">{{news.subject}}</span></h2>
+                </div>
+                <p class="text-style">
+                    {{news.content}}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

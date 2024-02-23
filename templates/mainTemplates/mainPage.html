@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    {% include 'mainTemplates/header.html' %}
+
+    <body class="header-fixed counter-scroll">
+
+        <!-- preloader -->
+        <div class="preload preload-container">
+           <!-- <div class="preload-logo"></div> -->
+           <div class="preload-page animate-rotate">
+                <img src="{% static 'assets/images/mark-page/Innova.png' %}" class="img-max_width" alt="img">
+            </div>
+
+        </div>
+        <!-- /preloader -->
+
+        <!-- wrapper -->
+        <div id="wrapper" class="animsition">
+
+            <!-- page -->
+            <div id="page" class="clearfix">
+
+                {% include 'mainTemplates/navbar.html' %}
+
+
+
+                {% block section1 %}
+    
+                {% endblock %}
+
+                {% block section2 %}
+    
+                {% endblock %}
+
+                {% block section3 %}
+    
+                {% endblock %}
+
+                {% block section4 %}
+    
+                {% endblock %}
+
+                {% block section5 %}
+    
+                {% endblock %}
+
+                {% block section6 %}
+    
+                {% endblock %}
+
+                {% block section7 %}
+    
+                {% endblock %}
+
+                {% include 'mainTemplates/footer.html' %}
+
+
+
+            </div>
+            <!-- /#page -->
+
+        </div>
+        <!-- /wrapper -->
+
+        <a id="scroll-top"></a>
+
+        {% include 'mainTemplates/script.html' %}
+
+        {% block js2 %}
+    
+        {% endblock %}
+    </body>
+
+</html>

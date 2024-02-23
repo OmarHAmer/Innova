@@ -1,0 +1,107 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/Contact Us-min.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Contact Us<span class="style-color">.</span></h1>
+                    <div class="breadcrumb-trail link-style-2">
+                        <a class="home" href="{% url 'innova:Home' %}">Home Page</a><span>Contact Us.</span>
+                    </div>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<section class="flat-contact flat-blog-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                {% for contactus in contactUs %}
+                <div class="box">
+                    <div class="heading">
+                        <div class="sub-title-contact wow fadeInDown" data-wow-delay="100ms" data-wow-duration="800ms">Hi! Let’s Talk About Our Companey</div>
+                        
+                        <div class="title-contact wow lightSpeedIn" data-wow-delay="100ms" data-wow-duration="800ms">{{contactus.city}}, <span class="text-color-3">{{contactus.country}}</span></div>
+                        <div class="row wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms">
+                            <div class="col-md-12">
+                                <p><span class="text-color-3">{{contactus.address}}</span></p>
+                                <p>{{contactus.description}}</span></p>
+                            </div> 
+                        </div>
+                        <div class="row wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">
+                            <div class="col-md-12">
+                                <p class="link-style-3"><i class="fa fa-phone" aria-hidden="true"> {{contactus.Phone}}</i></p>
+                                <p class="link-style-3"><i class="fa fa-fax" aria-hidden="true"> {{contactus.Fax}}</i></p>
+                            </div> 
+                        </div>
+                        <div class="row wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">    
+                            <div class="col-md-12">
+                                <p class="link-style-3"><i class="fa fa-envelope" aria-hidden="true"> innova@innovahealthcare.net</i></p>
+                            </div> 
+                        </div>
+                    </div>
+                                            
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6 col-md-12 padding-top">
+                <div class="post">
+                    <div id="respond" class="respond-comment">
+                        <h1 class="title-comment  wow lightSpeedIn" data-wow-delay="100ms" data-wow-duration="800ms">good <span class="text-color-3">Contacts</span></h1>
+                        <p class="text wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms"> You can send your suggestions and comments to us via</p> 
+
+                        <form id="contactform" class="comment-form form-submit wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms"
+                            method="post" action="{% url 'innova:contact' %}" enctype="multipart/form-data">   
+                            {% csrf_token %}
+                           
+                            <div class="text-wrap clearfix">
+                                <fieldset class="name-wrap style-text">
+                                    <input type="{{form.Full_Name.widget_type}}" id="name" class="tb-my-input" maxlength="{{form.Full_Name.field.max_length}}" 
+                                        name="{{ form.Full_Name.html_name }}" id="alloptions" 
+                                        placeholder="Enter Full Name" required ="{{form.Full_Name.required_css_class }}" 
+                                        {% if form.Full_Name.value is not None %} value="{{ form.Full_Name.value }}" {% endif %}>
+                                </fieldset>
+                                <fieldset class="email-wrap style-text">
+                                    <input type="{{form.Email_address.widget_type}}" id="email" class="tb-my-input" maxlength="{{form.Email_address.field.max_length}}" 
+                                        name="{{ form.Email_address.html_name }}" id="alloptions" 
+                                        placeholder="Enter Email Address" required ="{{form.Email_address.required_css_class }}" 
+                                        {% if form.Email_address.value is not None %} value="{{ form.Email_address.value }}" {% endif %}>
+                                </fieldset>
+                                <fieldset class="phone-wrap style-text">
+                                    <input type="{{form.Phone.widget_type}}" id="Phone" class="tb-my-input" maxlength="{{form.Phone.field.max_length}}" 
+                                        name="{{ form.Phone.html_name }}" id="alloptions" 
+                                        placeholder="+2 121 234 444" required ="{{form.Phone.required_css_class }}" 
+                                        {% if form.Phone.value is not None %} value="{{ form.Phone.value }}" {% endif %}>
+                                </fieldset>
+                            </div>
+                            <fieldset class="message-wrap">
+                                <textarea id="comment-message" name="{{ form.Message.html_name }}" rows="8" tabindex="4"
+                                    placeholder="Enter Your Message"
+                                    aria-required="true"></textarea>
+                            </fieldset>
+                            <button name="submit" type="submit" id="comment-reply"
+                                class="button btn-style4 btn-submit-comment"><span>Submit Now </span></button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+{% endblock %}

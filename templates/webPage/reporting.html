@@ -1,0 +1,106 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/Reporting.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Reporting<span class="style-color">.</span></h1>
+                    <div class="breadcrumb-trail link-style-2">
+                        <a class="home" href="{% url 'innova:Home' %}">Home Page</a><span>Reporting</span>
+                    </div>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<section class="flat-contact flat-blog-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 padding-top">
+                {% for subTitlePharma in subTitlePharmaCovigilanceEN %}
+                <div class="box">
+                    <div class="heading">
+                        <h3 class="wow lightSpeedIn" data-wow-delay="100ms" data-wow-duration="800ms" >{{subTitlePharma.subject}}</h3>
+                        <div class="row wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms" >
+                            <div class="col-md-12">
+                                <p><span>{{subTitlePharma.description}}</span></p>
+                            </div> 
+                        </div>
+                        {% if subTitlePharma.telephone %}
+                        <div class="row wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">
+                            <div class="col-md-12">
+                                <p class="link-style-3"><i class="fa fa-phone" aria-hidden="true"> {{subTitlePharma.telephone}}</i></p>
+                            </div> 
+                        </div>
+                        {% endif %}
+                        {% if subTitlePharma.email %}
+                        <div class="row wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">    
+                            <div class="col-md-12">
+                                <p class="link-style-3"><i class="fa fa-envelope" aria-hidden="true">  {{subTitlePharma.email}}</i></p>
+                            </div> 
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="slider-sec">
+                        {% if subTitlePharma.Image %}
+                        <img src="{{subTitlePharma.Image.url}}" alt="img" class="w-100">
+                        {% endif %}
+                    </div>
+                                            
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6 col-md-12 padding-top">
+                {% for subTitlePharma in subTitlePharmaCovigilance %}
+                <div class="box">
+                    <div class="heading">
+                        <h3 class="wow lightSpeedIn" data-wow-delay="100ms" data-wow-duration="800ms" style="direction:rtl;">{{subTitlePharma.subject}}</h3>
+                        <div class="row wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms" style="direction:rtl;">
+                            <div class="col-md-12">
+                                <p><span>{{subTitlePharma.description}}</span></p>
+                            </div> 
+                        </div>
+                        {% if subTitlePharma.telephone %}
+                        <div class="row wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">
+                            <div class="col-md-12">
+                                <p class="link-style-3"><i class="fa fa-phone" aria-hidden="true"> {{subTitlePharma.telephone}}</i></p>
+                            </div> 
+                        </div>
+                        {% endif %}
+                        {% if subTitlePharma.email %}
+                        <div class="row wow fadeInUp" data-wow-delay="100ms" data-wow-duration="800ms">    
+                            <div class="col-md-12">
+                                <p class="link-style-3"><i class="fa fa-envelope" aria-hidden="true">  {{subTitlePharma.email}}</i></p>
+                            </div> 
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="slider-sec">
+                        {% if subTitlePharma.Image %}
+                        <img src="{{subTitlePharma.Image.url}}" alt="img" class="w-100">
+                        {% endif %}
+                    </div>
+                                            
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+{% endblock %}

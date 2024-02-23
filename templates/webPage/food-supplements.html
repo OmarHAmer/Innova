@@ -1,0 +1,167 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/Therapeutic-areas2.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Therapeutic areas<span class="style-color">.</span></h1>
+                    <div class="breadcrumb-trail link-style-2">
+                        <a class="home" href="{% url 'innova:Home' %}">Home Page</a><span>Food Supplements</span>
+                    </div>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<div class="tf-space flat-blog flat-blog-details">
+    <div class="container">
+        <div class="row"> 
+            <div id="loadData" class="col-lg-8 col-md-12">                  
+                {% for product in products %}
+                <div class="flat-blog-grid wow fadeInDown" data-wow-delay="100ms" data-wow-duration="800ms">                               
+                    <div class="grid-post style-post">
+                        <div class="img-box">
+                            <div class="media">
+                                <img src="{{product.Image.url}}" alt="images">
+                            </div>
+                        </div>                                      
+                        <div class="content">
+                            <h3 class="title-item">{{product.name}}</h3>
+                            <p>{{product.description|slice:":100"}}....
+                                <h5>To access the appropriate content please confirm if you are </h5>
+                            </p>
+                            
+                            <div class="read-more link-style-3">
+                                
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <a href="{% url 'innova:productDetailsFood' productcategory=product.product_category product=product.name %}">a healthcare professional</a>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p> or </p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <a href="{% url 'innova:patientsAreaFood' product=product.name %}">a member of the public</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                                      
+                </div> 
+                {% endfor %}                 
+                <div class="themesflat-pagination clearfix">
+                    {% if products.has_other_pages %}
+
+                        <ul>
+                            {% if products.has_previous %}
+                            <li>
+                                <a class="page-numbers prev-style" onclick="applyPaginator({{ products.previous_page_number }})" tabindex="-1">Prev</a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                <a class="page-numbers" onclick="applyPaginator({{ products.number }})">{{ products.number }}</a>
+                            </li>
+                            {% if products.has_next %}
+                            <li>
+                                <a class="page-numbers next-style" onclick="applyPaginator({{ products.next_page_number }})">Next</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                    {% endif %}
+                </div>                                                                                                                          
+            </div>                      
+            <div class="col-lg-4 col-md-12 wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms">
+                <aside class="side-bar">
+                    <div class="inner-side-bar">                                       
+                        <div class="widget search">
+                            <div class="widget-title">
+                                <h3>Search Here</h3>                                       
+                            </div>
+                            <form role="search" id="ApplyFilter" class="search-form">
+                                {% csrf_token %}
+                                            <input type="hidden" name="page" id="pagenumber" value="{{ products.number }}">
+                                            <input type="hidden" name="product_category" id="productCategory">
+                                            <!--<input type="{{myFilter.form.product_category.widget_type}}" class="search-field" maxlength="{{myFilter.form.product_category.field.max_length}}" name="{{ myFilter.form.product_category.html_name }}" placeholder="Enter {{ myFilter.form.product_category.label }}"  {% if myFilter.form.product_category.value is not None %} value="{{ myFilter.form.product_category.value }}" {% endif %}> -->
+                                            <input type="{{myFilter.form.name.widget_type}}" class="search-field" maxlength="{{myFilter.form.name.field.max_length}}" name="{{ myFilter.form.name.html_name }}" placeholder="Search Product"  {% if myFilter.form.product_category.value is not None %} value="{{ myFilter.form.name.value }}" {% endif %}>
+                                            <button class="search-icon search-submit" type="submit" title="Search" ></button>
+                            </form>
+                        </div>
+                        <div class="widget widget-categories"> 
+                            <div class="widget-title item">
+                                <h3>Category</h3>  
+                            </div>                                                                                                                     
+                            <ul>
+                                <li>
+                                    <a onclick="applyCategory('')">All</a>
+                                </li>
+                                {% for Category  in productCategory %}
+                                <li>
+                                    <a onclick="applyCategory({{Category.id}})">{{Category}}</a>
+                                </li>
+                                {% endfor %} 
+                            </ul>
+                        </div>                             
+                    </div>
+                </aside>
+            </div>                     
+        </div>                      
+    </div>
+</div>
+{% endblock %}
+
+{% block js2 %}
+<script>
+    $('#ApplyFilter').on('submit',function(e){
+
+        e.preventDefault();
+        var formData = new FormData(this);
+        console.log(formData)
+
+        $.ajax({
+                url: "{% url 'innova:applyFilter' category=2 %}",
+                type:'POST',
+                data:formData,
+                success: function(data) {
+                    console.log('success');
+                    $("#loadData").html(data);
+                },
+                error: function (data) {
+                    console.log('error');
+                    message = '<div class="alert alert-danger mb-0" role="alert"> \
+                                        <strong>Oh snap!</strong> \
+                                        Change a few things up and try submitting again, or contact with Admin \
+                                    </div>';
+                        
+                        $("#loadData").html(message)
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+        });
+
+    });
+
+function applyPaginator(pageNum) {
+    $('#pagenumber').val(pageNum);
+    $('#ApplyFilter').submit();
+}
+
+function applyCategory(category){
+    $('#productCategory').val(category);
+    $('#ApplyFilter').submit();
+}
+
+</script>
+{% endblock %}

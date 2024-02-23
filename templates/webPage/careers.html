@@ -1,0 +1,108 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/cateeeeers.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Careers<span class="style-color">.</span></h1>
+                    <div class="breadcrumb-trail link-style-2">
+                        <a class="home" href="{% url 'innova:Home' %}">Home Page</a><span>Careers</span>
+                    </div>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<section class="flat-contact flat-blog-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="post">
+                    <div id="respond" class="respond-comment">
+                        <h1 class="title-comment wow lightSpeedIn" data-wow-delay="100ms" data-wow-duration="800ms"><span class="text-color-3">Why Innova Healthcare</span></h1>
+                        <p class="text wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms">At Innova, We are seeking for future leaders whether you are a recent graduate, a young or experienced Professionals. And we’re committed to support the learning you need to grow. We are proud of helping our employees grow and reach their utmost potential. For us, hiring associates and taking care of their professional development are critical building blocks for the success of our company, as we nurture the future leadership of Innova.</p> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="post">
+                    <div id="respond" class="respond-comment">
+                        <form id="contactform" class="comment-form form-submit"
+                            method="post" action="{% url 'innova:careers' %}" enctype="multipart/form-data">   
+                            {% csrf_token %}
+                           
+                            <div class="text-wrap clearfix">
+                                <fieldset class="name-wrap style-text">
+                                    <input type="{{form.name.widget_type}}" id="name" class="tb-my-input" maxlength="{{form.name.field.max_length}}" 
+                                        name="{{ form.name.html_name }}" id="alloptions" 
+                                        placeholder="Enter Full Name" required ="{{form.name.required_css_class }}" 
+                                        {% if form.name.value is not None %} value="{{ form.name.value }}" {% endif %}>
+                                </fieldset>
+                                <fieldset class="email-wrap style-text">
+                                    <input type="{{form.email.widget_type}}" id="email" class="tb-my-input" maxlength="{{form.email.field.max_length}}" 
+                                        name="{{ form.email.html_name }}" id="alloptions" 
+                                        placeholder="Enter Email Address" required ="{{form.email.required_css_class }}" 
+                                        {% if form.email.value is not None %} value="{{ form.email.value }}" {% endif %}>
+                                </fieldset>
+                            </div>
+                            <div class="text-wrap clearfix">
+                                <fieldset class="name-wrap style-text">
+                                    <input type="{{form.address.widget_type}}" class="tb-my-input" maxlength="{{form.address.field.max_length}}" 
+                                        name="{{ form.address.html_name }}" id="alloptions" 
+                                        placeholder="Enter Address" required ="{{form.address.required_css_class }}" 
+                                        {% if form.address.value is not None %} value="{{ form.address.value }}" {% endif %}>
+                                </fieldset>
+                            </div>
+                            <div class="text-wrap clearfix">
+                                <fieldset class="name-wrap style-text">
+                                    <input type="{{form.state.widget_type}}" class="tb-my-input" maxlength="{{form.state.field.max_length}}" 
+                                        name="{{ form.state.html_name }}" id="alloptions" 
+                                        placeholder="Enter State" required ="{{form.state.required_css_class }}" 
+                                        {% if form.state.value is not None %} value="{{ form.state.value }}" {% endif %}>
+                                </fieldset>
+                                <fieldset class="name-wrap style-text">
+                                    <input type="{{form.city.widget_type}}" class="tb-my-input" maxlength="{{form.city.field.max_length}}" 
+                                        name="{{ form.city.html_name }}" id="alloptions" 
+                                        placeholder="Enter City" required ="{{form.city.required_css_class }}" 
+                                        {% if form.city.value is not None %} value="{{ form.city.value }}" {% endif %}>
+                                </fieldset>
+                                <fieldset class="phone-wrap style-text">
+                                    <input type="{{form.telephone.widget_type}}" id="phone" class="tb-my-input" maxlength="{{form.telephone.field.max_length}}" 
+                                        name="{{ form.telephone.html_name }}" id="alloptions" 
+                                        placeholder="+2 121 234 444" required ="{{form.telephone.required_css_class }}" 
+                                        {% if form.telephone.value is not None %} value="{{ form.telephone.value }}" {% endif %}>
+                                </fieldset>
+                            </div>
+                            <div class="text-wrap clearfix">
+                                <fieldset class="name-wrap style-text">
+                                    <input type="{{form.jobVacancy.widget_type}}" class="tb-my-input" maxlength="{{form.jobVacancy.field.max_length}}" 
+                                        name="{{ form.jobVacancy.html_name }}" id="alloptions" 
+                                        placeholder="Enter Job Vacancy" required ="{{form.jobVacancy.required_css_class }}" 
+                                        {% if form.state.jobVacancy is not None %} value="{{ form.jobVacancy.value }}" {% endif %}>
+                                </fieldset>
+                                <fieldset class="name-wrap style-text">
+                                    {{form.attachCV}}
+                                </fieldset>
+                            </div>
+                            <button name="submit" type="submit" id="comment-reply"
+                                class="button btn-style4 btn-submit-comment"><span>Submit Now </span></button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>            
+        </div>
+    </div>
+</section>
+{% endblock %}

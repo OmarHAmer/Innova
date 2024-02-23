@@ -1,0 +1,79 @@
+{% extends 'mainTemplates/mainPage.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block section1 %}
+<section class="flat-title-page">
+    <div class="overlay-slider style"></div>
+    <div class="overlay-page">
+        <img src="{% static 'assets/images/mark-page/Therapeutic-areas1.png' %}" alt="img">
+    </div>
+    <div class="container">
+        <div class="row">                          
+            <div class="zup col-lg-12 col-md-12">                              
+                <div class="breadcrumbs">
+                    <h1>Product Details<span class="style-color">.</span></h1>
+                </div>                                                           
+            </div>                          
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block section2 %}
+<section class="tf-space flat-journey">
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-lg-5 col-md-5  wow fadeInRight" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="media">
+                    <img src="{{product.Image.url}}" alt="images">                                                       
+                </div>                             
+            </div>
+            <div class="col-lg-7  wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="800ms">
+                <div class="journey-heading">
+                    <div class="tf-sub-title">{{product.product_category.name}}</div>
+                    <h2 class="tf-title"><span class="text-color-3 style-title">{{product.name}}</span></h2>
+                </div>
+                <p class="text-style">
+                    {{product.description}}
+                </p>
+                {% for subTitle in subTitleProducts %}
+                <div class="service-content mt-25">
+
+                    {% if arabic %}
+                    <h6 class="mb-2" style="direction: rtl;">
+                    {% else %}
+                    <h6 class="mb-2">
+                    {% endif %}
+
+                        {{subTitle.subject}}
+                    </h6>
+
+                    {% if arabic %}
+                    <p style="direction:rtl;">
+                    {% else %}
+                    <p>
+                    {% endif %}
+
+                        {{subTitle.description|linebreaksbr}}
+                    </p>
+
+                    <div class="slider-sec">
+                        {% if subTitle.Image %}
+                        <img src="{{subTitle.Image.url}}" alt="img" class="w-100">
+                        {% endif %}
+                    </div>
+                 </div>
+                 <br>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+            
+
+        </div>
+
+    </div>
+</section>
+{% endblock %}
